@@ -10,6 +10,18 @@ const Index = () => {
     GBP: { buy: 116.30, sell: 117.10 }
   });
 
+  const handleOpenAccount = () => {
+    alert('Спасибо за интерес! Форма открытия счёта в разработке.');
+  };
+
+  const handleLogin = () => {
+    alert('Форма входа в разработке.');
+  };
+
+  const handleNavClick = (section: string) => {
+    alert(`Раздел "${section}" в разработке.`);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setRates(prev => ({
@@ -89,6 +101,7 @@ const Index = () => {
               {navigation.map((item) => (
                 <button
                   key={item.name}
+                  onClick={() => handleNavClick(item.name)}
                   className="flex items-center gap-2 text-foreground hover:text-accent transition-colors"
                 >
                   <Icon name={item.icon} size={18} />
@@ -98,8 +111,8 @@ const Index = () => {
             </nav>
 
             <div className="flex items-center gap-4">
-              <Button variant="outline">Войти</Button>
-              <Button>Открыть счёт</Button>
+              <Button variant="outline" onClick={handleLogin}>Войти</Button>
+              <Button onClick={handleOpenAccount}>Открыть счёт</Button>
             </div>
           </div>
         </div>
@@ -116,10 +129,10 @@ const Index = () => {
               Откройте счёт онлайн за 5 минут без визита в отделение.
             </p>
             <div className="flex gap-4 animate-fade-in">
-              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
+              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={handleOpenAccount}>
                 Открыть счёт
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" onClick={() => alert('Подробнее о банке в разработке.')}>
                 Узнать больше
               </Button>
             </div>
@@ -208,7 +221,7 @@ const Index = () => {
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
             Откройте счёт в ПремиумБанк за 5 минут и получите доступ ко всем возможностям
           </p>
-          <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
+          <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={handleOpenAccount}>
             Открыть счёт онлайн
           </Button>
         </div>
