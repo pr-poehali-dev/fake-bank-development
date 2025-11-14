@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import LoginDialog from '@/components/LoginDialog';
-import OpenAccountDialog from '@/components/OpenAccountDialog';
+import Header from '@/components/Header';
 
 const Index = () => {
   const [rates, setRates] = useState({
@@ -12,12 +11,7 @@ const Index = () => {
     GBP: { buy: 116.30, sell: 117.10 }
   });
 
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [accountOpen, setAccountOpen] = useState(false);
 
-  const handleNavClick = (section: string) => {
-    alert(`Раздел "${section}" в разработке.`);
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,15 +34,7 @@ const Index = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const navigation = [
-    { name: 'Карты', icon: 'CreditCard' },
-    { name: 'Кредиты', icon: 'Wallet' },
-    { name: 'Вклады', icon: 'PiggyBank' },
-    { name: 'Ипотека', icon: 'Home' },
-    { name: 'Инвестиции', icon: 'TrendingUp' },
-    { name: 'О банке', icon: 'Building2' },
-    { name: 'Контакты', icon: 'Phone' }
-  ];
+
 
   const products = [
     {
@@ -86,34 +72,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-white sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-2">
-              <Icon name="Building2" size={32} className="text-primary" />
-              <span className="text-2xl font-bold text-primary">ПремиумБанк</span>
-            </div>
-            
-            <nav className="hidden lg:flex items-center gap-6">
-              {navigation.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.name)}
-                  className="flex items-center gap-2 text-foreground hover:text-accent transition-colors"
-                >
-                  <Icon name={item.icon} size={18} />
-                  <span>{item.name}</span>
-                </button>
-              ))}
-            </nav>
-
-            <div className="flex items-center gap-4">
-              <Button variant="outline" onClick={() => setLoginOpen(true)}>Войти</Button>
-              <Button onClick={() => setAccountOpen(true)}>Открыть счёт</Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <section className="bg-gradient-to-br from-primary via-primary to-accent text-white py-20">
         <div className="container mx-auto px-4">
@@ -126,10 +85,10 @@ const Index = () => {
               Откройте счёт онлайн за 5 минут без визита в отделение.
             </p>
             <div className="flex gap-4 animate-fade-in">
-              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={() => setAccountOpen(true)}>
+              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
                 Открыть счёт
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" onClick={() => alert('Подробнее о банке в разработке.')}>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                 Узнать больше
               </Button>
             </div>
@@ -218,7 +177,7 @@ const Index = () => {
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
             Откройте счёт в ПремиумБанк за 5 минут и получите доступ ко всем возможностям
           </p>
-          <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={() => setAccountOpen(true)}>
+          <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
             Открыть счёт онлайн
           </Button>
         </div>
@@ -280,8 +239,6 @@ const Index = () => {
         </div>
       </footer>
 
-      <LoginDialog open={loginOpen} onOpenChange={setLoginOpen} />
-      <OpenAccountDialog open={accountOpen} onOpenChange={setAccountOpen} />
     </div>
   );
 };
