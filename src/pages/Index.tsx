@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import LoginDialog from '@/components/LoginDialog';
+import OpenAccountDialog from '@/components/OpenAccountDialog';
 
 const Index = () => {
   const [rates, setRates] = useState({
@@ -10,13 +12,8 @@ const Index = () => {
     GBP: { buy: 116.30, sell: 117.10 }
   });
 
-  const handleOpenAccount = () => {
-    alert('Спасибо за интерес! Форма открытия счёта в разработке.');
-  };
-
-  const handleLogin = () => {
-    alert('Форма входа в разработке.');
-  };
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
 
   const handleNavClick = (section: string) => {
     alert(`Раздел "${section}" в разработке.`);
@@ -111,8 +108,8 @@ const Index = () => {
             </nav>
 
             <div className="flex items-center gap-4">
-              <Button variant="outline" onClick={handleLogin}>Войти</Button>
-              <Button onClick={handleOpenAccount}>Открыть счёт</Button>
+              <Button variant="outline" onClick={() => setLoginOpen(true)}>Войти</Button>
+              <Button onClick={() => setAccountOpen(true)}>Открыть счёт</Button>
             </div>
           </div>
         </div>
@@ -129,7 +126,7 @@ const Index = () => {
               Откройте счёт онлайн за 5 минут без визита в отделение.
             </p>
             <div className="flex gap-4 animate-fade-in">
-              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={handleOpenAccount}>
+              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={() => setAccountOpen(true)}>
                 Открыть счёт
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" onClick={() => alert('Подробнее о банке в разработке.')}>
@@ -221,7 +218,7 @@ const Index = () => {
           <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
             Откройте счёт в ПремиумБанк за 5 минут и получите доступ ко всем возможностям
           </p>
-          <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={handleOpenAccount}>
+          <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" onClick={() => setAccountOpen(true)}>
             Открыть счёт онлайн
           </Button>
         </div>
@@ -282,6 +279,9 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <LoginDialog open={loginOpen} onOpenChange={setLoginOpen} />
+      <OpenAccountDialog open={accountOpen} onOpenChange={setAccountOpen} />
     </div>
   );
 };
